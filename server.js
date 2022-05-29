@@ -1,16 +1,20 @@
 const express = require('express');
-const router = require('./router');
+const axios = require('axios');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 5001;
 
-// parse incoming JSON data
-app.use(express.json());
-// parse incoming string or array data
-app.use(express.urlencoded({ extended: true }));
-
-app.use(router);
-
-app.listen(PORT, function () {
-  console.log(`now listening on port ${PORT}`);
+app.get('/', (req, res) => {
+  axios
+    .get('https://60c8ed887dafc90017ffbd56.mockapi.io/robots')
+    .then((response) => {
+      res.send(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
+
+app.listen(PORT, () =>
+  console.log(`Application is running on http://localhost:${PORT}`)
+);

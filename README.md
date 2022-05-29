@@ -35,23 +35,24 @@ The following videos show the routes being tested in Insomnia.
 
 ## Installation
 
+The instructions for this project can be found [here](https://github.com/SVT-Robotics/recruiting-takehome-services).
+
 _This project requires Node.js and other dependencies_
 
 - [How to install Node](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
-After you have installed Node, navigate to the directory you would like to use using the CLI and then clone this repository:
+Navigate to the directory of choice using the CLI and then clone this repository:
 
 ```bash
 git clone git@github.com:wolfskillobyte/svt-robotics.git
 ```
 
-Create `.gitignore` to include the following:
+Use `npm i` to install dependencies.
+
+Start the server
 
 ```bash
-node_modules
-.env
-.DS_Store
-package-lock.json
+node server
 ```
 
 ## Tests
@@ -66,6 +67,6 @@ _This project used Insomnia for testing_
 
 - [npm](https://docs.npmjs.com/)
 - [Express](https://expressjs.com/en/4x/api.html)
-- [Sequelize](https://sequelize.org/master/)
+- [Axios](https://axios-http.com/docs/intro)
 
 ## Review
