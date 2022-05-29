@@ -1,0 +1,24 @@
+{
+  "name": "svt-robotics",
+  "version": "1.0.0",
+  "description": "```md\r description\r ```",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wolfskillobyte/svt-robotics.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wolfskillobyte/svt-robotics/issues"
+  },
+  "homepage": "https://github.com/wolfskillobyte/svt-robotics#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
