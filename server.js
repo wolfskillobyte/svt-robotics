@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
-const { parse } = require('path');
+// const { parse } = require('path');
+// const { response } = require('express');
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -16,48 +17,83 @@ app.get('/api/robots', (req, res) => {
     });
 });
 
-app.post('/api/robots/closest', (req, res) => {
+app.post('/api/robots/payloadForAll', (req, res) => {
   async function getRobots() {
     try {
       const response = await axios.get(
         'https://60c8ed887dafc90017ffbd56.mockapi.io/robots'
       );
 
-      const robotData = response.data;
       // hardcoaded values for payload
-      let payloadX = 10;
-      let payloadY = 46;
+      let payloadX = 23;
+      let payloadY = 12;
 
-      // loop through array
-      for (var i = 0; i < robotData.length; i++) {
-        // declare data needed in easy-to-read variables
-        let x = robotData[i].x;
-        let y = robotData[i].y;
-        let robotId = robotData[i].robotId;
-        let batteryLevel = robotData[i].batteryLevel;
+      // declare data needed in easy-to-read variables
+      const robotData = response.data;
 
-        // formula to calculate distance
-        const distance = Math.floor(
-          Math.sqrt((payloadX - x) ** 2 + (payloadY - y) ** 2)
-        );
+      //   let maxBattery = Math.max(robotData.batteryLevel);
 
-        if (distance <= 10) {
-          // formula to find highest battery
+      let newArr = Object.values(
+        robotData.map((element) => ({
+          robotId: Number(element.robotId),
+          battery: element.batteryLevel,
+          distance: Number(
+            Math.floor(
+              Math.sqrt(
+                (payloadX - element.x) ** 2 + (payloadY - element.y) ** 2
+              )
+            )
+          )
+        }))
+      );
 
-          console.log(
-            `
-                    RobotId: ${robotId}
-                    Battery: ${batteryLevel}
-                    Distance: ${distance}`
-          );
-        }
-        // res.send(closest);
-      }
+      console.log(newArr);
+
+      res.send(newArr);
     } catch (error) {
       console.log(error);
     }
   }
   getRobots();
+});
+
+app.post('/api/robots/allClosest', (req, res) => {
+  async function getAllClosest() {
+    try {
+      const response = await axios.get(
+        'https://60c8ed887dafc90017ffbd56.mockapi.io/robots'
+      );
+
+      // hardcoaded values for payload
+      let payloadX = 23;
+      let payloadY = 12;
+
+      // declare data needed in easy-to-read variables
+      const robotData = response.data;
+
+      let newArr = Object.values(
+        robotData.map((element) => ({
+          robotId: Number(element.robotId),
+          battery: element.batteryLevel,
+          distance: Number(
+            Math.floor(
+              Math.sqrt(
+                (payloadX - element.x) ** 2 + (payloadY - element.y) ** 2
+              )
+            )
+          )
+        }))
+      );
+      let allClosest = newArr.filter(function (e) {
+        return e.distance <= 10;
+      });
+      console.log(allClosest);
+      res.send(allClosest);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  getAllClosest();
 });
 
 app.listen(PORT, () =>
