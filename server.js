@@ -31,8 +31,6 @@ app.post('/api/robots/payloadForAll', (req, res) => {
       // declare data needed in easy-to-read variables
       const robotData = response.data;
 
-      //   let maxBattery = Math.max(robotData.batteryLevel);
-
       let newArr = Object.values(
         robotData.map((element) => ({
           robotId: Number(element.robotId),
@@ -124,14 +122,21 @@ app.post('/api/robots/closest', (req, res) => {
         }))
       );
 
-      let closest = newArr.filter(function (e) {
-        if (e.distance <= 10) {
-          newArr.filter(Math.max(e.battery));
-          return closest;
-        }
+      let filterTwice;
+      // array of closest will be filtered array
+      filterTwice = newArr.filter(function (e) {
+        // let maxBattery = Math.max(e.battery);
+        return e.distance <= 10;
       });
-      console.log(closest);
-      res.send('bbbb');
+
+      console.log(filterTwice);
+
+      const bestRobot = filterTwice.sort(function (a, b) {
+        return parseFloat(b.battery) - parseFloat(a.battery);
+      });
+      console.log(bestRobot[0]);
+
+      res.send(bestRobot[0]);
     } catch (error) {
       console.log(error);
     }
