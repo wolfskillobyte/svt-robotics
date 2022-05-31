@@ -1,11 +1,19 @@
 const express = require('express');
 const axios = require('axios');
-// const { parse } = require('path');
-// const { response } = require('express');
 
 const app = express();
 const PORT = process.env.PORT || 5001;
 
+app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true
+  })
+);
+
+app.use(express.static('public'));
+
+///////////////////////////////////////
 app.get('/api/robots', (req, res) => {
   axios
     .get('https://60c8ed887dafc90017ffbd56.mockapi.io/robots')
@@ -17,6 +25,7 @@ app.get('/api/robots', (req, res) => {
     });
 });
 
+/////////////////////////////////////////////////
 app.post('/api/robots/payloadForAll', (req, res) => {
   async function getRobots() {
     try {
@@ -55,6 +64,7 @@ app.post('/api/robots/payloadForAll', (req, res) => {
   getRobots();
 });
 
+//////////////////////////////////////////////////
 app.post('/api/robots/allClosest', (req, res) => {
   async function getAllClosest() {
     try {
@@ -94,6 +104,7 @@ app.post('/api/robots/allClosest', (req, res) => {
   getAllClosest();
 });
 
+/////////////////////////////////////////////
 app.post('/api/robots/closest', (req, res) => {
   async function getClosest() {
     try {
@@ -101,23 +112,23 @@ app.post('/api/robots/closest', (req, res) => {
         'https://60c8ed887dafc90017ffbd56.mockapi.io/robots'
       );
 
-      // hardcoaded values for payload
-      let payloadX = 23;
-      let payloadY = 12;
+      let payloadX;
+      let payloadY;
+
+      payloadX = req.body.payloadX;
+      payloadY = req.body.payloadY;
+
+      console.log(payloadX + payloadY);
 
       // declare data needed in easy-to-read variables
       const robotData = response.data;
 
       let newArr = Object.values(
-        robotData.map((element) => ({
-          robotId: Number(element.robotId),
-          battery: element.batteryLevel,
+        robotData.map((e) => ({
+          robotId: Number(e.robotId),
+          battery: e.batteryLevel,
           distance: Number(
-            Math.floor(
-              Math.sqrt(
-                (payloadX - element.x) ** 2 + (payloadY - element.y) ** 2
-              )
-            )
+            Math.floor(Math.sqrt((payloadX - e.x) ** 2 + (payloadY - e.y) ** 2))
           )
         }))
       );
