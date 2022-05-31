@@ -13,7 +13,7 @@ The goal is to write an API endpoint that accepts a POST request of a load that 
 }
 ```
 
-A successful request would return the closest robot within 1-10 distance units from load. If more than one is returned, return one with the highest battery life. Example of returned data:
+A successful request would return the closest robot within 1-10 distance units from load. If more than one robot is returned, return one with the highest battery life. Example of returned data:
 
 ```js
 {
@@ -38,7 +38,7 @@ A successful request would return the closest robot within 1-10 distance units f
 
 Here is how the application appears and functions in Insomnia
 
-<img src='' />
+<img src='./imgs/i-am-a-placeholder.jpg' />
 
 ## Walkthrough
 
