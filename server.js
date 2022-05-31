@@ -53,9 +53,7 @@ app.post('/api/robots/payloadForAll', (req, res) => {
           )
         }))
       );
-
-      console.log(newArr);
-
+      // console.log(newArr);
       res.send(newArr);
     } catch (error) {
       console.log(error);
@@ -72,12 +70,16 @@ app.post('/api/robots/allClosest', (req, res) => {
         'https://60c8ed887dafc90017ffbd56.mockapi.io/robots'
       );
 
-      // hardcoaded values for payload
-      let payloadX = 23;
-      let payloadY = 12;
-
       // declare data needed in easy-to-read variables
       const robotData = response.data;
+      // init variables
+      let loadId;
+      let payloadX;
+      let payloadY;
+      // set variables to incoming post data
+      loadId = req.body.loadId;
+      payloadX = req.body.payloadX;
+      payloadY = req.body.payloadY;
 
       let newArr = Object.values(
         robotData.map((element) => ({
@@ -95,7 +97,7 @@ app.post('/api/robots/allClosest', (req, res) => {
       let allClosest = newArr.filter(function (e) {
         return e.distance <= 10;
       });
-      console.log(allClosest);
+      // console.log(allClosest);
       res.send(allClosest);
     } catch (error) {
       console.log(error);
@@ -112,17 +114,21 @@ app.post('/api/robots/closest', (req, res) => {
         'https://60c8ed887dafc90017ffbd56.mockapi.io/robots'
       );
 
+      // declare data needed in easy-to-read variables
+      const robotData = response.data;
+      // init variables
+      let loadId;
       let payloadX;
       let payloadY;
-
+      // set variables to incoming post data
+      loadId = req.body.loadId;
       payloadX = req.body.payloadX;
       payloadY = req.body.payloadY;
 
-      console.log(payloadX + payloadY);
-
-      // declare data needed in easy-to-read variables
-      const robotData = response.data;
-
+      // new variable holds new array of objects
+      // the new objects contain the information that we want
+      // robotId, battery, and distance.
+      // distance is calculated with the formula given
       let newArr = Object.values(
         robotData.map((e) => ({
           robotId: Number(e.robotId),
@@ -133,20 +139,25 @@ app.post('/api/robots/closest', (req, res) => {
         }))
       );
 
+      // init new variable that will filter closest robots
+      // this being referenced is optional
       let filterTwice;
-      // array of closest will be filtered array
+      // array of closest will be filtered array within 10 units
       filterTwice = newArr.filter(function (e) {
         // let maxBattery = Math.max(e.battery);
         return e.distance <= 10;
       });
 
-      console.log(filterTwice);
+      // console.log(filterTwice);
 
+      // sort our array to find highest battery
       const bestRobot = filterTwice.sort(function (a, b) {
         return parseFloat(b.battery) - parseFloat(a.battery);
       });
-      console.log(bestRobot[0]);
 
+      // console.log(bestRobot[0]);
+
+      // send robot data
       res.send(bestRobot[0]);
     } catch (error) {
       console.log(error);

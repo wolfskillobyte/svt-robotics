@@ -36,15 +36,15 @@ A successful request would return the closest robot within 1-10 distance units f
 
 ## Preview
 
-Here is how the application appears and functions in Insomnia
+Here is how the application appears and functions in Insomnia.
 
-<img src='./imgs/i-am-a-placeholder.jpg' />
+<img src='./imgs/svt-robotics.gif' />
 
 ## Walkthrough
 
-The following videos show the routes being tested in Insomnia.
+The following video shows the routes being tested in Insomnia.
 
-- [YouTube]()
+- [YouTube](https://youtu.be/vw02AhneU6Y)
 
 ## Installation
 
@@ -86,7 +86,14 @@ _This project used Insomnia for testing_
 
 ## Review
 
-Overall, this was a very straightforward and fun back-end assignment that challenged what I would normally build with JS applications. I wanted to focus on solving this problem purely on the back-end, even though I could have easily solved it faster by setting up a simple HTML page to handle POST data or a even an API front-end. Programs such as Insomnia are immensely helpful in testing this data and provide an easier-to-read format in contrast to utilizing the console alone.
+This was a straightforward and fun back-end assignment that challenged what I would normally build with JS applications. Insomnia was a helpful tool in testing this data to provide an easier-to-read format as opposed to utilizing the console alone.
 
-If I were to expand on this, I would make an API front-end that would accept more GET, POST, PUT, DELETE requests.
-A simple React front-end is also viable if this code were to be regularly interacted with by users or employees. React's useState feature would have provided a very simple solution, but would have deterred me from challenging myself on problem-solving with JS. Working with algorithms is less familiar territory, which made this challenge more enjoyable and rewarding.
+If I were to expand on this project, I would make an API front-end that would accept more `GET`, `POST`, `PUT`, and `DELETE` requests. A simple React front-end is also viable if this code were to be regularly interacted with by users or employees. React's useState feature would have provided a quick solution, but would have deterred me from challenging myself on problem-solving with JS alone. Because this was a smaller project, the code has been condensed to one file, although this isn't always good practice for scaling applications. If this were to become larger, I would seperate the routes from `server.js` by utilizing the aspects of the MVC paradigm, especially if a front-end was implemented.
+
+If I were to improve upon the code I have written, I would focus on optimizing my code to find a better algorithm. Working with algorithms is less familiar territory, which made this challenge more enjoyable and rewarding, and I hope to learn more in the future.
+
+Thanks for reading, all feedback is welcome.
+
+<a href="mailto:sraewolfskill@gmail.com">
+  <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" />
+ </a>
