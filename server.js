@@ -96,6 +96,49 @@ app.post('/api/robots/allClosest', (req, res) => {
   getAllClosest();
 });
 
+app.post('/api/robots/closest', (req, res) => {
+  async function getClosest() {
+    try {
+      const response = await axios.get(
+        'https://60c8ed887dafc90017ffbd56.mockapi.io/robots'
+      );
+
+      // hardcoaded values for payload
+      let payloadX = 23;
+      let payloadY = 12;
+
+      // declare data needed in easy-to-read variables
+      const robotData = response.data;
+
+      let newArr = Object.values(
+        robotData.map((element) => ({
+          robotId: Number(element.robotId),
+          battery: element.batteryLevel,
+          distance: Number(
+            Math.floor(
+              Math.sqrt(
+                (payloadX - element.x) ** 2 + (payloadY - element.y) ** 2
+              )
+            )
+          )
+        }))
+      );
+
+      let closest = newArr.filter(function (e) {
+        if (e.distance <= 10) {
+          newArr.filter(Math.max(e.battery));
+          return closest;
+        }
+      });
+      console.log(closest);
+      res.send('bbbb');
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  getClosest();
+});
+
 app.listen(PORT, () =>
   console.log(`Application is running on http://localhost:${PORT}`)
 );
