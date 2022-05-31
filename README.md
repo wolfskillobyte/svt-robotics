@@ -3,7 +3,7 @@
 ## Purpose
 
 The provided API returns a list of robots in a fleet. Each object in the array contains the robot's ID number, battery life, and xy-coordinates.
-The goal is to write an API endpoint that accepts a payload of a load that needs to be moved, and makes an HTTP request to the provided endpoint. Example:
+The goal is to write an API endpoint that accepts a POST request of a load that needs to be moved, and makes an HTTP request to the provided endpoint. Example:
 
 ```js
 // these numbers are placeholders and don't represent the given data
